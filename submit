@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Forms</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+
+  Your form has been submitted!
+
+</body>
+</html>

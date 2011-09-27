@@ -1,0 +1,24 @@
+body {
+  font-family: 'Lucida Grande', sans-serif;
+  font-size: 1em;
+  margin: 0;
+  padding: 1em 3em;
+}
+
+input {
+  font-size: 1em;
+  padding: 0.25em;
+  margin: 0 0 1em 0;
+  display: block;
+}
+
+input[type="submit"] {
+  padding: 0.5em;
+}
+
+label {
+  display: block;
+  margin: 0;
+  color: #999;
+  padding: 0.5em 0;
+}
