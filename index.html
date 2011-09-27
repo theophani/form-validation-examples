@@ -7,24 +7,23 @@
 </head>
 <body>
 
-  <form action="submit.html">
+  <form action="submit">
 
     <label for="name">Name *</label>
-    <input id="name" name="name" type="text" />
+    <input name="name" type="text" required />
 
     <label for="name">Coupon</label>
-    <input id="coupon" name="coupon" type="text" />
+    <input name="coupon" type="text" pattern="free|halfprice" />
 
     <label for="name">Email</label>
-    <input id="email" name="email" type="text" />
+    <input name="email" type="email" />
 
     <label for="name">Secret Code *</label>
-    <input id="secret" name="secret" type="text" />
+    <input name="secret" type="text" required pattern="reject" />
 
-    <input id="submit" type="submit" />
+    <input type="submit" />
 
   </form>
 
-  <script src="validate.js"></script>
 </body>
 </html>
