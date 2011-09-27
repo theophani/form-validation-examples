@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Form Validation</title>
+<style>
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: auto;
+  color: #333;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 5em;
+  background-color: #fff;
+  color: #F60;
+  font-weight: bold;
+
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+
+div {
+  padding: 1em 10%;
+  color: #fff;
+  background-color: #F60;
+  text-shadow: #930 3px 3px 1px;
+  width: 80%;
+}
+
+</style>
+</head>
+<body>
+
+<div id="message">
+  Form Validation
+</div>
+
+<script>
+  var messages = [
+    "Form Validation",
+    "Innovation",
+    "Innovation through experimentation"
+    ];
+  var current = 0;
+  var message = document.getElementById('message');
+
+  document.body.onclick = function () {
+    current = current +1;
+    if (current >= messages.length) {
+      current = 0;
+    }
+    message.innerText = messages[current];
+  };
+
+</script>
+
+</body>
+</html>
