@@ -10,16 +10,16 @@
   <form action="submit">
 
     <label for="name">Name *</label>
-    <input name="name" type="text" required />
+    <input name="name" type="text" required data-custom-validation-message="Name is required" />
 
     <label for="name">Coupon</label>
-    <input name="coupon" type="text" pattern="free|halfprice" />
+    <input name="coupon" type="text" pattern="free|halfprice" data-custom-validation-message="Only correct coupons are allowed." />
 
     <label for="name">Email</label>
     <input name="email" type="email" />
 
     <label for="name">Secret Code *</label>
-    <input name="secret" type="text" required pattern="reject" />
+    <input name="secret" type="text" required pattern="reject" data-custom-validation-message="Be sure to enter the SECRET CODE!" />
 
     <input type="submit" />
 
