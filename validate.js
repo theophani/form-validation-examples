@@ -17,11 +17,12 @@ form.addEventListener('submit', function (event) {
 
 });
 
+var output = document.createElement('div');
+document.body.appendChild(output);
+
 // The confirmation happens on success
 var confirm = function (response) {
-  var output = document.createElement('div');
   output.innerHTML = response;
-  document.body.appendChild(output);
 };
 
 var submitButton = form.querySelector('[type=submit]');
@@ -50,31 +51,44 @@ submitButton.addEventListener('click', function (event) {
 
 });
 
-form.addEventListener('invalid', function (event) {
+document.addEventListener('invalid', function (event) {
 
   event.preventDefault(); // silence hints in Chrome and Firefox
 
-  var input = event.srcElement;
+  var input = event.target;
   var message = input.validationMessage;
   var hint;
-  form.hints = form.hints || [];
+  input.form.hints = input.form.hints || [];
 
   if (!input.validity.valid) {
     if (!input.validity.customError && input.dataset.customValidationMessage) {
       message = input.dataset.customValidationMessage;
     }
     hint = document.createElement('span');
-    hint.innerText = message;
-    form.insertBefore(hint, input);
-    form.hints.push(hint);
+    hint.innerHTML = message;
+    input.form.insertBefore(hint, input);
+    input.form.hints.push(hint);
+    input.hint = hint;
+    input.addEventListener('keyup', checkInputValidity);
   }
 
-}, true); // true [useCapture] needed to bubble events from inputs
+}, true); // true bubbles events from inputs
+
+var checkInputValidity = function (event) {
+  var input = event.target;
+  input.removeEventListener('keyup', checkInputValidity);
+  input.form.removeChild(input.hint);
+  input.checkValidity();
+}
 
 var removeHints = function (form) {
   if (!form.hints) return;
 
   while (form.hints.length) {
-    form.removeChild(form.hints.pop());
+    try {
+      form.removeChild(form.hints.pop());
+    } catch (err) {
+      // already removed from DOM
+    }
   }
 };
