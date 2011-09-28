@@ -1,4 +1,5 @@
 var form = document.forms[0];
+var submitButton = form.querySelector('[type=submit]');
 
 form.addEventListener('submit', function (event) {
 
@@ -17,31 +18,21 @@ form.addEventListener('submit', function (event) {
 
 });
 
-var output = document.createElement('div');
-document.body.appendChild(output);
-
-// The confirmation happens on success
-var confirm = function (response) {
-  output.innerHTML = response;
-};
-
-var submitButton = form.querySelector('[type=submit]');
+// Safari default here is to fire a submit event at the form.
+// Safari never performs the checkValidity() unprompted.
+//
+// Chrome/Firefox default here is to checkValidity of form.
+// Chrome/Firefox submit event not fired (cancelled?)
+// if checkValidity returns false.
+//
+// It is possible (if the form is one field) to fire
+// a submit event without this click event happening.
+//
+// Approach:
+// Cancel the default, then explicity fire submit at form.
+// This centralizes the checkValidity().
 
 submitButton.addEventListener('click', function (event) {
-
-  // Safari default here is to fire a submit event at the form.
-  // Safari never performs the checkValidity() unprompted.
-
-  // Chrome/Firefox default here is to checkValidity of form.
-  // Chrome/Firefox submit event not fired (cancelled?)
-  // if checkValidity returns false.
-
-  // It is possible (if the form is one field) to fire
-  // a submit event without this click event happening.
-
-  // Approach:
-  // Cancel the default, then explicity fire submit at form.
-  // This centralizes the checkValidity().
 
   event.preventDefault();
 
@@ -50,6 +41,13 @@ submitButton.addEventListener('click', function (event) {
   form.dispatchEvent(e);
 
 });
+
+var output = document.createElement('div');
+document.body.appendChild(output);
+
+var confirm = function (response) {
+  output.innerHTML = response;
+};
 
 document.addEventListener('invalid', function (event) {
 
