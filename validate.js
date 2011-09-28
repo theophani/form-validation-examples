@@ -1,5 +1,5 @@
 var form = document.forms[0];
-var submitButton = document.querySelectorAll('[type=submit]')[0];
+var submitButton = form.querySelector('[type=submit]');
 var inputs = Array.prototype.slice.apply(form.elements);
 
 form.addEventListener('submit', function (event) {
