@@ -3,6 +3,7 @@ var submitButton = document.querySelectorAll('[type=submit]')[0];
 var inputs = Array.prototype.slice.apply(form.elements);
 
 form.addEventListener('submit', function (event) {
+
   event.preventDefault();
 
   if (form.checkValidity()) {
@@ -22,6 +23,7 @@ submitButton.addEventListener('click', function (event) {
 
   inputs.forEach(function (input) {
     var message = input.dataset.customValidationMessage || '';
+
     input.setCustomValidity('');
 
     if (!input.validity.valid) {
