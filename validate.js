@@ -1,4 +1,6 @@
 var form = document.forms[0];
+var submitButton = document.querySelectorAll('[type=submit]')[0];
+var inputs = Array.prototype.slice.apply(form.elements);
 
 form.addEventListener('submit', function (event) {
 
@@ -15,15 +17,12 @@ form.addEventListener('submit', function (event) {
 
 });
 
-var submitButton = document.querySelectorAll('[type=submit]')[0];
-var inputs = Array.prototype.slice.apply(form.elements);
-
 submitButton.addEventListener('click', function (event) {
 
   inputs.forEach(function (input) {
-    input.setCustomValidity('');
-
     var message = input.dataset.customValidationMessage || '';
+
+    input.setCustomValidity('');
 
     if (!input.validity.valid) {
       input.setCustomValidity(message);
@@ -32,9 +31,10 @@ submitButton.addEventListener('click', function (event) {
 
 });
 
+var output = document.createElement('div');
+document.body.appendChild(output);
+
 var confirm = function (response) {
   output.innerHTML = response;
 };
 
-var output = document.createElement('div');
-document.body.appendChild(output);
