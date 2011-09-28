@@ -15,8 +15,6 @@ form.addEventListener('submit', function (event) {
       data: $.serialize(form),
       success: confirm
     });
-  } else {
-    warn(form);
   }
 
 });
@@ -30,18 +28,21 @@ var confirm = function (response) {
 };
 
 var warn = function (form) {
-  var innerHTML = '';
+  console.log('test');
   var inputs = Array.prototype.slice.apply(form.elements);
   inputs.forEach(function (input) {
     var message = input.validationMessage;
+    var label, hint;
     if (!input.validity.valid) {
       if (!input.validity.customError && input.dataset.customValidationMessage) {
         message = input.dataset.customValidationMessage;
       }
-      innerHTML += '<p>' + message + '</p>';
+      hint = document.createElement('span');
+      hint.innerText = message;
+      form.insertBefore(hint, input);
+      console.log(message);
     }
   });
-  output.innerHTML = innerHTML;
 };
 
 var submitButton = form.querySelector('[type=submit]');
@@ -53,14 +54,30 @@ submitButton.addEventListener('click', function (event) {
 
   // Approach: cancel the default, explicity fire submit at form
 
-  event.preventDefault();
-
-  var e = document.createEvent('HTMLEvents');
-  e.initEvent('submit', true, true);
-  form.dispatchEvent(e);
-
-}, true);
+});
 
 form.addEventListener('invalid', function (event) {
-  // hrmm
-}, true);
+
+  // In Chrome and Firefox,
+  // these events are fired on submitButtom click
+  // before submit is fired.
+
+  // In Safari, one must manually execute checkValidity()
+  // within the submit event listener.
+
+  event.preventDefault();
+
+  var input = event.srcElement;
+  var message = input.validationMessage;
+  var hint;
+
+  if (!input.validity.valid) {
+    if (!input.validity.customError && input.dataset.customValidationMessage) {
+      message = input.dataset.customValidationMessage;
+    }
+    hint = document.createElement('span');
+    hint.innerText = message;
+    form.insertBefore(hint, input);
+  }
+
+}, true); // true [useCapture] needed to bubble events from inputs
