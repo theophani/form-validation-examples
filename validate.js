@@ -2,8 +2,9 @@ var form = document.forms[0];
 
 form.addEventListener('submit', function (event) {
 
+  event.preventDefault();
+
   if (form.checkValidity()) {
-    event.preventDefault();
 
     // Now do Ajax stuff here!
     $.ajax({
