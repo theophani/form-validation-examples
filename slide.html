@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Learned</title>
+<style>
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: auto;
+  color: #333;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 5em;
+  background-color: #fff;
+  color: #F60;
+  font-weight: bold;
+
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+
+div {
+  padding: 1em 5%;
+  color: #fff;
+  background-color: #F60;
+  text-shadow: #930 3px 3px 1px;
+  width: 90%;
+}
+
+</style>
+</head>
+<body>
+
+<div id="message">
+  Validation rules in the markup are just the beginning.
+</div>
+
+<script>
+  var messages = [
+    "The console is your friend.",
+    "Validation rules in the markup are just the beginning."
+    ];
+  var message = document.getElementById('message');
+  var current = messages.length;
+
+  document.body.onclick = function () {
+    current = current +1;
+    if (current >= messages.length) {
+      current = 0;
+    }
+    message.innerText = messages[current];
+  };
+
+</script>
+
+</body>
+</html>
